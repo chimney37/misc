@@ -15,11 +15,6 @@ set nowritebackup
 set nobackup
 set noswapfile
 
-" add customization to make it better
-" leader key is mapped to space, so space-g will goto definition
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 filetype off                  " required
 filetype plugin indent on    " required
 
@@ -28,7 +23,7 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    \ set textwidth=85 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
@@ -62,6 +57,10 @@ Plugin 'scrooloose/syntastic'
 
 " enable PEP8 checking
 Plugin 'nvie/vim-flake8'
+
+" Python docstring
+Plugin 'heavenshell/vim-pydocstring'
+nmap <silent> <C-D> <Plug>(pydocstring)
 
 " NERDTree as file explorer
 Plugin 'scrooloose/nerdtree'
@@ -106,4 +105,12 @@ au VimEnter *  NERDTree
 " Close Nerd Tree if last buffer
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" add customization to make it better
+" leader key is mapped to space, so space-g will goto definition
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:yvm_python_binary_path = 'python'
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+" YCM sub command mappings
+nnoremap jd :YcmCompleter GoToDefinition<CR>
+nnoremap jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
