@@ -49,6 +49,9 @@ Plugin 'VundleVim/Vundle.vim'
 " auto-indentation for multiple lines
 Plugin 'vim-scripts/indentpython.vim'
 
+" clear indentation indicators
+Plugin 'nathanaelkane/vim-indent-guides'
+
 " auto-complete for python
 Bundle 'Valloric/YouCompleteMe'
 
@@ -91,10 +94,10 @@ set t_Co=256
 " Choose color scheme
 if has('gui_running')
     set background=dark
-    #colorscheme solarized
-    colorscheme molokai 
-else
+    "colorscheme solarized
     colorscheme zenburn
+else
+    colorscheme molokai 
 endif
 
 " pretty code
@@ -118,3 +121,8 @@ let g:yvm_python_binary_path = 'python'
 " YCM sub command mappings
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap jd :YcmCompleter GoToDefinition<CR>
+
+" indentation customization (Plugin)
+let g:indent_guides_enable_on_vim_startup = 1
+
+
