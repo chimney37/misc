@@ -14,6 +14,8 @@ set splitright
 set nowritebackup
 set nobackup
 set noswapfile
+" ignore case in search
+set ignorecase
 
 filetype off                  " required
 filetype plugin indent on    " required
@@ -57,7 +59,7 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Yggdroot/indentLine'
 
 " auto-complete for python
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 " syntax checking and highlighting
 Plugin 'scrooloose/syntastic'
@@ -83,6 +85,9 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 " FileSuper Searching (Ctrl-P)
 Plugin 'kien/ctrlp.vim'
 
+" Fuzzy and incremental Search
+Plugin 'haya14busa/incsearch.vim'
+
 " Git Integration
 Plugin 'tpope/vim-fugitive'
 
@@ -95,7 +100,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
 
 " color scheme extension to tmux following vim's style
-Bundle 'edkolev/tmuxline.vim'
+Plugin 'edkolev/tmuxline.vim'
 
 " cheat sheet
 Plugin 'lifepillar/vim-cheat40'
@@ -167,3 +172,10 @@ nmap <silent> <C-D> <Plug>(pydocstring)
 set hlsearch
 highlight Search ctermbg=DarkCyan
 highlight Search ctermfg=LightRed
+
+"fuzzy search (Plugin)
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+"doesn't move the cursor
+map g/ <Plug>(incsearch-stay) 
+
