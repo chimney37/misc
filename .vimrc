@@ -97,6 +97,9 @@ Plugin 'flazz/vim-colorschemes'
 " color scheme extension to tmux following vim's style
 Bundle 'edkolev/tmuxline.vim'
 
+" cheat sheet
+Plugin 'lifepillar/vim-cheat40'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -136,7 +139,20 @@ let NERDTreeShowHidden = 1
 " switch between NERD and other files
 nmap <Leader><Tab> <C-w>w
 
-" add customization to make it better
+let g:NERDTreeIndicatorMapCustom = {
+	\ "Modified"	:"*",
+	\ "Staged"	:"a",
+	\ "Untracked"	:"u",
+	\ "Renamed"	:">",
+	\ "Unmerged"	:"u",
+	\ "Deleted"	:"x",
+	\ "Dirty"	:"@",
+	\ "Clean"	:"c",
+	\ "Ignored"	:"i",
+	\ "Unknown"	:"?"
+	\}
+
+" complete me add customization to make it better
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:yvm_python_binary_path = 'python'
 
