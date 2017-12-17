@@ -15,6 +15,9 @@ set nowritebackup
 set nobackup
 set noswapfile
 
+"highlight search by default
+set hlsearch
+
 filetype off                  " required
 filetype plugin indent on    " required
 
@@ -74,7 +77,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 " current virtual env, git branch, files being edited
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
-" Super Searching (Ctrl-P)
+" Fi leSuper Searching (Ctrl-P)
 Plugin 'kien/ctrlp.vim'
 
 " Git Integration
