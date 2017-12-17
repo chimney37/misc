@@ -51,6 +51,9 @@ Plugin 'VundleVim/Vundle.vim'
 "accelerated scrolling
 Plugin 'rhysd/accelerated-jk'
 
+"language checker
+Plugin 'dpelle/vim-LanguageTool'
+
 " auto-indentation for multiple lines
 Plugin 'vim-scripts/indentpython.vim'
 
@@ -105,6 +108,10 @@ Plugin 'edkolev/tmuxline.vim'
 " cheat sheet
 Plugin 'lifepillar/vim-cheat40'
 
+" easy note taking
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -120,13 +127,16 @@ else
     colorscheme molokai 
 endif
 
-"
+" acceleration of cursor (Plugin)
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
 
 " pretty code
 let python_highlight_all=1
 syntax on
+
+" call flake to check pep8 everytime writing to python file
+autocmd BufWritePost *.py call Flake8()
 
 "NERD Tree
 " ignore pyc files in NERDTree
@@ -178,4 +188,11 @@ map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 "doesn't move the cursor
 map g/ <Plug>(incsearch-stay) 
+
+" notes (Plugin)
+let g:notes_directories = ['~/Documents/Notes']
+let g:notes_suffix='.txt'
+
+" languagetool jar location
+let g:languagetool_jar='/usr/local/Cellar/languagetool/3.9/libexec/languagetool-commandline.jar'
 
