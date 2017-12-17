@@ -15,9 +15,6 @@ set nowritebackup
 set nobackup
 set noswapfile
 
-"highlight search by default
-set hlsearch
-
 filetype off                  " required
 filetype plugin indent on    " required
 
@@ -49,11 +46,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+"accelerated scrolling
+Plugin 'rhysd/accelerated-jk'
+
 " auto-indentation for multiple lines
 Plugin 'vim-scripts/indentpython.vim'
 
 " clear indentation indicators
-Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Yggdroot/indentLine'
 
 " auto-complete for python
 Bundle 'Valloric/YouCompleteMe'
@@ -66,7 +67,6 @@ Plugin 'nvie/vim-flake8'
 
 " Python docstring
 Plugin 'heavenshell/vim-pydocstring'
-nmap <silent> <C-D> <Plug>(pydocstring)
 
 " NERDTree as file explorer
 Plugin 'scrooloose/nerdtree'
@@ -74,19 +74,28 @@ Plugin 'scrooloose/nerdtree'
 "Use Tabs for NERDTree
 Plugin 'jistr/vim-nerdtree-tabs'
 
+"Mark files in NERDTree if they have been edited
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
 " current virtual env, git branch, files being edited
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
-" Fi leSuper Searching (Ctrl-P)
+" FileSuper Searching (Ctrl-P)
 Plugin 'kien/ctrlp.vim'
 
 " Git Integration
 Plugin 'tpope/vim-fugitive'
 
+" Show edited lines managed by Git
+Plugin 'airblade/vim-gitgutter'
+
 " coloring
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
+
+" color scheme extension to tmux following vim's style
+Bundle 'edkolev/tmuxline.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -103,10 +112,15 @@ else
     colorscheme molokai 
 endif
 
+"
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+
 " pretty code
 let python_highlight_all=1
 syntax on
 
+"NERD Tree
 " ignore pyc files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
@@ -116,6 +130,11 @@ au VimEnter *  NERDTree
 " Close Nerd Tree if last buffer
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" let NERD Tree hidden files by default
+let NERDTreeShowHidden = 1
+
+" switch between NERD and other files
+nmap <Leader><Tab> <C-w>w
 
 " add customization to make it better
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -125,7 +144,10 @@ let g:yvm_python_binary_path = 'python'
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap jd :YcmCompleter GoToDefinition<CR>
 
-" indentation customization (Plugin)
-let g:indent_guides_enable_on_vim_startup = 1
+" pydoc string
+nmap <silent> <C-D> <Plug>(pydocstring)
 
-
+"highlight search by default
+set hlsearch
+highlight Search ctermbg=DarkCyan
+highlight Search ctermfg=LightRed
