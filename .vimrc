@@ -135,8 +135,19 @@ nmap k <Plug>(accelerated_jk_gk)
 let python_highlight_all=1
 syntax on
 
+"syntastic setting
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_python_checkers= ['flake8']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " call flake to check pep8 everytime writing to python file
-autocmd BufWritePost *.py call Flake8()
+" autocmd BufWritePost *.py call Flake8()
 
 "NERD Tree
 " ignore pyc files in NERDTree
