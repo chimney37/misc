@@ -91,7 +91,7 @@ Plugin 'kien/ctrlp.vim'
 " Fuzzy and incremental Search
 Plugin 'haya14busa/incsearch.vim'
 
-" Git Integration
+" Git Integration (:Git)
 Plugin 'tpope/vim-fugitive'
 
 " Show edited lines managed by Git
@@ -105,12 +105,15 @@ Plugin 'flazz/vim-colorschemes'
 " color scheme extension to tmux following vim's style
 Plugin 'edkolev/tmuxline.vim'
 
-" cheat sheet
+" cheat sheet (<leader>?)
 Plugin 'lifepillar/vim-cheat40'
 
-" easy note taking
+" easy note taking (:Note, :SearchNotes)
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
+
+" hacker news (:HackerNews)
+Plugin 'ryanss/vim-hackernews'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
