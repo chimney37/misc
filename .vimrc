@@ -60,6 +60,10 @@ Plugin 'vim-scripts/indentpython.vim'
 " clear indentation indicators
 Plugin 'Yggdroot/indentLine'
 
+" Folding code
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'Konfekt/FastFold'
+
 " auto-complete for python
 Plugin 'Valloric/YouCompleteMe'
 
@@ -171,6 +175,9 @@ let NERDTreeShowHidden = 1
 " switch between NERD and other files
 nmap <Leader><Tab> <C-w>w
 
+" open NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
 let g:NERDTreeIndicatorMapCustom = {
 	\ "Modified"	:"*",
 	\ "Staged"	:"a",
@@ -183,6 +190,22 @@ let g:NERDTreeIndicatorMapCustom = {
 	\ "Ignored"	:"i",
 	\ "Unknown"	:"?"
 	\}
+
+" allow multiple highlighting based on file in NERDTree
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('txt', 'yellow', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('csv', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('tsv', 'yellow', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('xls', 'yellow', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('py', 'cyan', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('pickle', 'blue', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('log', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('sh', 'DarkCyan', 'none', '#ffa500', '#151515')
 
 " complete me add customization to make it better
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -213,3 +236,8 @@ let g:notes_suffix='.txt'
 " languagetool jar location
 let g:languagetool_jar='/usr/local/Cellar/languagetool/3.9/libexec/languagetool-commandline.jar'
 
+" Folding configuration
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  []
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
