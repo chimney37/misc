@@ -58,7 +58,6 @@ Plugin 'dpelle/vim-LanguageTool'
 Plugin 'vim-scripts/indentpython.vim'
 
 " clear indentation indicators
-" Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Yggdroot/indentLine'
 
 " auto-complete for python
@@ -82,8 +81,9 @@ Plugin 'jistr/vim-nerdtree-tabs'
 "Mark files in NERDTree if they have been edited
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-" current virtual env, git branch, files being edited
+" UI to show current virtual env, git branch, files being edited
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'lokaltog/powerline-fontpatcher'
 
 " FileSuper Searching (Ctrl-P)
 Plugin 'kien/ctrlp.vim'
@@ -104,6 +104,9 @@ Plugin 'flazz/vim-colorschemes'
 
 " color scheme extension to tmux following vim's style
 Plugin 'edkolev/tmuxline.vim'
+
+" change python to more unicode symbol like
+" Plugin 'ehamberg/vim-cute-python'
 
 " cheat sheet (<leader>?)
 Plugin 'lifepillar/vim-cheat40'
