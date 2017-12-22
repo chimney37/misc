@@ -228,6 +228,17 @@ let g:fastfold_savehook = 1
 let g:fastfold_fold_command_suffixes =  []
 let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
 
+" Tabbing
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+
+
 " acceleration of cursor (Plugin)
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
