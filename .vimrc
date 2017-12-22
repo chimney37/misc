@@ -1,6 +1,9 @@
 " very useful vim optimized for python
 " https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
-"
+
+" enable 256 colors
+set t_Co=256
+set ttyfast
 set nocompatible              " required
 "set backspace to be able to delete anywhere
 set backspace=indent,eol,start
@@ -25,7 +28,7 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    \ set textwidth=100|
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
@@ -50,6 +53,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 "accelerated scrolling
 Plugin 'rhysd/accelerated-jk'
+
+"vertical move
+Plugin 'bruno-/vim-vertical-move'
 
 "language checker
 Plugin 'dpelle/vim-LanguageTool'
@@ -125,9 +131,6 @@ Plugin 'ryanss/vim-hackernews'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
-" enable 256 colors
-set t_Co=256
-
 " Choose color scheme
 if has('gui_running')
     set background=dark
@@ -137,27 +140,16 @@ else
     colorscheme molokai 
 endif
 
-" acceleration of cursor (Plugin)
-nmap j <Plug>(accelerated_jk_gj)
-nmap k <Plug>(accelerated_jk_gk)
+" disable arrow keys (rites of passage of VIM)
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
 
 " pretty code
+set hlsearch
 let python_highlight_all=1
 syntax on
-
-"syntastic setting
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_python_checkers= ['flake8']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" call flake to check pep8 everytime writing to python file
-" autocmd BufWritePost *.py call Flake8()
 
 "NERD Tree
 " ignore pyc files in NERDTree
@@ -210,16 +202,31 @@ call NERDTreeHighlightFile('sh', 'DarkCyan', 'none', '#ffa500', '#151515')
 " complete me add customization to make it better
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:yvm_python_binary_path = 'python'
+let g:ycm_echo_current_diagnostic=0
 
 " YCM sub command mappings
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap jd :YcmCompleter GoToDefinition<CR>
 
+"syntastic setting
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_python_checkers= ['flake8']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" call flake to check pep8 everykime writing to python file
+" autocmd BufWritePost *.py call Flake8()
+
+
 " pydoc string
 nmap <silent> <C-D> <Plug>(pydocstring)
 
 "highlight search by default
-set hlsearch
+"set hlsearch
 highlight Search ctermbg=DarkCyan
 highlight Search ctermfg=LightRed
 
@@ -241,3 +248,8 @@ nmap zuz <Plug>(FastFoldUpdate)
 let g:fastfold_savehook = 1
 let g:fastfold_fold_command_suffixes =  []
 let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+
+" acceleration of cursor (Plugin)
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+
