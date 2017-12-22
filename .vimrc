@@ -19,6 +19,7 @@ set nobackup
 set noswapfile
 " ignore case in search
 set ignorecase
+set showcmd
 
 filetype off                  " required
 filetype plugin indent on    " required
