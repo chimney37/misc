@@ -199,28 +199,6 @@ call NERDTreeHighlightFile('pickle', 'blue', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('log', 'Magenta', 'none', '#ff00ff', '#151515')
 call NERDTreeHighlightFile('sh', 'DarkCyan', 'none', '#ffa500', '#151515')
 
-" complete me add customization to make it better
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:yvm_python_binary_path = 'python'
-let g:ycm_echo_current_diagnostic=0
-
-" YCM sub command mappings
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap jd :YcmCompleter GoToDefinition<CR>
-
-"syntastic setting
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_python_checkers= ['flake8']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" call flake to check pep8 everykime writing to python file
-" autocmd BufWritePost *.py call Flake8()
-
 
 " pydoc string
 nmap <silent> <C-D> <Plug>(pydocstring)
@@ -252,4 +230,25 @@ let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
 " acceleration of cursor (Plugin)
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
+
+" complete me add customization to make it better
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:yvm_python_binary_path = 'python'
+
+" YCM sub command mappings
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"syntastic setting
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_python_checkers= ['flake8']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" call flake to check pep8 everykime writing to python file
+" autocmd BufWritePost *.py call Flake8()
+
 
