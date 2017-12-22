@@ -58,6 +58,9 @@ Plugin 'rhysd/accelerated-jk'
 "vertical move
 Plugin 'bruno-/vim-vertical-move'
 
+"go development plugin
+Plugin 'fatih/vim-go'
+
 "language checker
 Plugin 'dpelle/vim-LanguageTool'
 
@@ -263,4 +266,7 @@ let g:syntastic_check_on_wq = 0
 " call flake to check pep8 everykime writing to python file
 " autocmd BufWritePost *.py call Flake8()
 
-
+" Macros
+let @a = '^f=ha la j'
+let @b = 'f,a '
+let @c = '^a j'
