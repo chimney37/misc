@@ -61,9 +61,6 @@ Plugin 'bruno-/vim-vertical-move'
 "go development plugin
 Plugin 'fatih/vim-go'
 
-"language checker
-Plugin 'chimney37/vim-LanguageTool'
-
 " auto-indentation for multiple lines
 Plugin 'vim-scripts/indentpython.vim'
 
@@ -73,6 +70,9 @@ Plugin 'Yggdroot/indentLine'
 " Folding code
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'Konfekt/FastFold'
+
+" commenter
+Plugin 'scrooloose/nerdcommenter'
 
 " auto-complete for python
 Plugin 'Valloric/YouCompleteMe'
@@ -96,7 +96,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " UI to show current virtual env, git branch, files being edited
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'lokaltog/powerline-fontpatcher'
 
 " FileSuper Searching (Ctrl-P)
@@ -138,6 +138,10 @@ Plugin 'ryanss/vim-hackernews'
 
 " quantify coding time
 Plugin 'wakatime/vim-wakatime'
+
+"language checker
+Plugin 'chimney37/vim-LanguageTool'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
