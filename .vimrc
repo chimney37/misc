@@ -97,13 +97,15 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " UI to show current virtual env, git branch, files being edited
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'lokaltog/powerline-fontpatcher'
+" Plugin 'lokaltog/powerline-fontpatcher'
 
 " FileSuper Searching (Ctrl-P)
 Plugin 'kien/ctrlp.vim'
 
 " Fuzzy and incremental Search
 Plugin 'haya14busa/incsearch.vim'
+" easy motion
+Plugin 'easymotion/vim-easymotion'
 
 " Git Integration (:Git)
 Plugin 'tpope/vim-fugitive'
@@ -180,7 +182,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeShowHidden = 1
 
 " switch between NERD and other files
-nmap <Leader><Tab> <C-w>w
+"nmap <Leader><Tab> <C-w>w
 
 " open NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -264,9 +266,9 @@ let g:yvm_python_binary_path = 'python'
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "syntastic setting
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_python_checkers= ['flake8']
 let g:syntastic_always_populate_loc_list = 1
