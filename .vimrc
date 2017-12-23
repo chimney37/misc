@@ -132,6 +132,9 @@ Plugin 'xolox/vim-notes'
 " hacker news (:HackerNews)
 Plugin 'ryanss/vim-hackernews'
 
+" quantify coding time
+Plugin 'wakatime/vim-wakatime'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -270,3 +273,5 @@ let g:syntastic_check_on_wq = 0
 let @a = '^f=ha la j'
 let @b = 'f,a '
 let @c = '^a j'
+let @d = 'f:a l'
+let @e = '$a  # flake8: noqa'
