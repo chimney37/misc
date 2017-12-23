@@ -62,7 +62,7 @@ Plugin 'bruno-/vim-vertical-move'
 Plugin 'fatih/vim-go'
 
 "language checker
-Plugin 'dpelle/vim-LanguageTool'
+Plugin 'chimney37/vim-LanguageTool'
 
 " auto-indentation for multiple lines
 Plugin 'vim-scripts/indentpython.vim'
@@ -122,6 +122,9 @@ Plugin 'edkolev/tmuxline.vim'
 
 " change python to more unicode symbol like
 " Plugin 'ehamberg/vim-cute-python'
+
+" For creating pretty tables in Markdown
+Plugin 'dhruvasagar/vim-table-mode'
 
 " cheat sheet (<leader>?)
 Plugin 'lifepillar/vim-cheat40'
@@ -242,7 +245,6 @@ nnoremap tk  :tabprev<CR>
 nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
 
