@@ -107,6 +107,7 @@ Plugin 'haya14busa/incsearch.vim'
 
 " Git Integration (:Git)
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-dispatch'
 
 " Show edited lines managed by Git
 Plugin 'airblade/vim-gitgutter'
