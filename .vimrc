@@ -278,9 +278,12 @@ let g:syntastic_check_on_wq = 0
 " call flake to check pep8 everykime writing to python file
 " autocmd BufWritePost *.py call Flake8()
 
-" Macros
+" Macros (python PEP8)
 let @a = '^f=ha la j'
 let @b = 'f,a '
 let @c = '^a j'
 let @d = 'f:a l'
 let @e = '$a  # flake8: noqa'
+
+" Macro (for converting markdown to bbcode
+let @m = ':2,$y+ |$ |read !echo "`pbpaste`" | perl ~/Documents/misc/md2bb.pl/md2bb.pl'
