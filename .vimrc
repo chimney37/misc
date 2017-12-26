@@ -339,6 +339,7 @@ augroup Custom_FileTypeGroup
     " kvg_  g_ move to the last  non-blank char of current line
     autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?\\v^(\\-\\-\|\\=\\=)+$\r:nohlsearch\rkvg_"<cr>
     autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?\\v^(\\-\\-\|\\=\\=)+$\r:nohlsearch\rg_vk0"<cr>
+    autocmd FileType markdown onoremap in@ :<c-u>execute "normal!  /\\w\\v[a-z]+\\@\r:nohlsearch\rvt@"<cr>
 augroup END
 
 
