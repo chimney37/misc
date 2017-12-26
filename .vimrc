@@ -300,8 +300,11 @@ iabbrev @@ chimney37@hotmail.com
 iabbrev ccopy Copyright 2017 chimney37, all rights reserved.
 iabbrev ssig -- <cr>chimney37<cr>chimney37@hotmail.com
 "complicated mappings
+" encase word under visual selection in double quotes
 nnoremap <localleader>" viw<esc>a"<esc>bi"<esc>lel
+" encase word under visiaul selection in single quotes
 nnoremap <localleader>' viw<esc>a'<esc>bi'<esc>lel
+" encase entire visual selection in single quotes
 vnoremap <localleader>' <esc>`<<esc>i'<esc>`>li'<esc>
 nnoremap H ^
 nnoremap L $
@@ -311,13 +314,21 @@ noremap <Down> <NOP>
 noremap <Up> <NOP>
 noremap <Right> <NOP>
 inoremap jk  <esc>
-"commenting out certain code lines in different file types 
+onoremap p i(
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F(vi(<cr>
+
 augroup Custom_FileTypeGroup
     autocmd!
+    "commenting out certain code lines in different file types 
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
     autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+    " snippet for javascript
     autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+    " tag outline close for html
+    autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
 augroup END
+
 
 
 " Macros (python PEP8)
