@@ -1,5 +1,4 @@
-" very useful vim optimized for python
-" https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
+" VIM CONFIGURATION FILE (CHIMNEY37)
 
 " enable 256 colors
 set t_Co=256
@@ -21,22 +20,21 @@ set noswapfile
 set ignorecase
 set showcmd
 
-filetype off                  " required
-filetype plugin indent on    " required
-
 " add indentation for PEP8
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=100|
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-
-" flag extra whitespace
 highlight BadWhitespace ctermbg=red guibg=darkred
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+augroup Custom_PEP8_Group
+    autocmd!
+    au BufNewFile,BufRead *.py
+        \ set tabstop=4 |
+        \ set softtabstop=4 |
+        \ set shiftwidth=4 |
+        \ set textwidth=100|
+        \ set expandtab |
+        \ set autoindent |
+        \ set fileformat=unix
+    " flag extra whitespace
+    au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+augroup END
 
 " move between splits
 nnoremap <C-J> <C-W><C-J>
@@ -44,6 +42,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -144,9 +143,14 @@ Plugin 'wakatime/vim-wakatime'
 "language checker
 Plugin 'chimney37/vim-LanguageTool'
 
+" test development plugin
+Plugin 'chimney37/potion'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+filetype plugin indent on    " required
+syntax on
 
 " Choose color scheme
 if has('gui_running')
@@ -166,27 +170,13 @@ endif
 " pretty code
 set hlsearch
 let python_highlight_all=1
-syntax on
 
 "NERD Tree
 " ignore pyc files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-
-" Open Nerd Tree by default
-au VimEnter *  NERDTree
-
-" Close Nerd Tree if last buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " let NERD Tree hidden files by default
 let NERDTreeShowHidden = 1
-
-" switch between NERD and other files
-"nmap <Leader><Tab> <C-w>w
-
-" open NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
+" uses custom symbols for various Git status 
 let g:NERDTreeIndicatorMapCustom = {
 	\ "Modified"	:"*",
 	\ "Staged"	:"a",
@@ -200,21 +190,32 @@ let g:NERDTreeIndicatorMapCustom = {
 	\ "Unknown"	:"?"
 	\}
 
+" open NERDTree
+noremap <C-n> :NERDTreeToggle<CR>
+
 " allow multiple highlighting based on file in NERDTree
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
+" Custom NERDTree Group for au commands
+augroup Custom_NERDTreeGroup
+    autocmd!
+    " Open Nerd Tree by default
+    autocmd VimEnter *  NERDTree
 
-call NERDTreeHighlightFile('txt', 'yellow', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('csv', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('tsv', 'yellow', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('xls', 'yellow', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('py', 'cyan', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('pickle', 'blue', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('log', 'Magenta', 'none', '#ff00ff', '#151515')
-call NERDTreeHighlightFile('sh', 'DarkCyan', 'none', '#ffa500', '#151515')
+    " Close Nerd Tree if last buffer
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    call NERDTreeHighlightFile('txt', 'yellow', 'none', 'green', '#151515')
+    call NERDTreeHighlightFile('csv', 'yellow', 'none', 'yellow', '#151515')
+    call NERDTreeHighlightFile('tsv', 'yellow', 'none', '#3366FF', '#151515')
+    call NERDTreeHighlightFile('xls', 'yellow', 'none', '#3366FF', '#151515')
+    call NERDTreeHighlightFile('py', 'cyan', 'none', 'yellow', '#151515')
+    call NERDTreeHighlightFile('pickle', 'blue', 'none', 'yellow', '#151515')
+    call NERDTreeHighlightFile('log', 'Magenta', 'none', '#ff00ff', '#151515')
+    call NERDTreeHighlightFile('sh', 'DarkCyan', 'none', '#ffa500', '#151515')
+augroup END
 
 
 " pydoc string
@@ -225,24 +226,29 @@ nmap <silent> <C-D> <Plug>(pydocstring)
 highlight Search ctermbg=DarkCyan
 highlight Search ctermfg=LightRed
 
+
 "fuzzy search (Plugin)
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 "doesn't move the cursor
 map g/ <Plug>(incsearch-stay) 
 
+
 " notes (Plugin)
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_suffix='.txt'
 
+
 " languagetool jar location
 let g:languagetool_jar='/usr/local/Cellar/languagetool/3.9/libexec/languagetool-commandline.jar'
+
 
 " Folding configuration
 nmap zuz <Plug>(FastFoldUpdate)
 let g:fastfold_savehook = 1
 let g:fastfold_fold_command_suffixes =  []
 let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+
 
 " Tabbing
 nnoremap th  :tabfirst<CR>
@@ -258,25 +264,61 @@ nnoremap td  :tabclose<CR>
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
 
+" You Complete me (Plugin)
 " complete me add customization to make it better
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:yvm_python_binary_path = 'python'
 
 " YCM sub command mappings
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+noremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 
 "syntastic setting
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
 let g:syntastic_python_checkers= ['flake8']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-" call flake to check pep8 everykime writing to python file
-" autocmd BufWritePost *.py call Flake8()
+
+" extra useful mappings
+noremap - <nop>
+let maplocalleader="-"
+" swap 2 lines
+nnoremap <localleader>- ddp
+nnoremap <localleader>_ ddkP
+" make a word in mode uppercase
+inoremap <c-u> <esc>viwU$a
+nnoremap <c-u> viwU$
+" make it easier to edit vimrc and source it
+nnoremap <localleader>ev :split $MYVIMRC<cr>
+nnoremap <localleader>sv :source $MYVIMRC<cr>
+" bunch of abbreviations
+iabbrev adn and
+iabbrev tehn then
+iabbrev waht what
+iabbrev @@ chimney37@hotmail.com
+iabbrev ccopy Copyright 2017 chimney37, all rights reserved.
+iabbrev ssig -- <cr>chimney37<cr>chimney37@hotmail.com
+"complicated mappings
+nnoremap <localleader>" viw<esc>a"<esc>bi"<esc>lel
+nnoremap <localleader>' viw<esc>a'<esc>bi'<esc>lel
+vnoremap <localleader>' <esc>`<<esc>i'<esc>`>li'<esc>
+nnoremap H ^
+nnoremap L $
+" rites of passage of vim
+noremap <left> <NOP>
+noremap <Down> <NOP>
+noremap <Up> <NOP>
+noremap <Right> <NOP>
+inoremap jk  <esc>
+"commenting out certain code lines in different file types 
+augroup Custom_FileTypeGroup
+    autocmd!
+    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+    autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+    autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+augroup END
+
 
 " Macros (python PEP8)
 let @a = '^f=ha la j'
@@ -287,3 +329,4 @@ let @e = '$a  # flake8: noqa'
 
 " Macro (for converting markdown to bbcode
 let @m = ':2,$y+ |$ |read !echo "`pbpaste`" | perl ~/Documents/misc/md2bb.pl/md2bb.pl'
+let @n = ':2,$y+ |$ |read !echo "`pbpaste`" | node ~/Documents/nodejs/index.js'
