@@ -327,6 +327,18 @@ augroup Custom_FileTypeGroup
     autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
     " tag outline close for html
     autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
+    " Delete header of markdown in current paragraph 
+    " Note: normal! doesn' recognize <cr>, hence we use execute. ! is to make
+    " sure that the non-remappable mapping remains non-remappable. Without it,
+    " it becomes mappable. help: normal 
+    " Note: on the regular expression in execute string below
+    " ?\v^(\-\-|\=\=)+$ searches backwards for lines beginning and ending with 2 or more equal signs. - and + is escaped in searches because they have a special meaning in vim-regex.
+    " since the whole expression is a string, \ is escaped with \ to make it a literal. \v is "very magic". help: pattern-overview
+    " | is also escaped with \ for a different reason, because | in execute strings is a command separater. help: execute
+    " :nohlsearch clears search highlighting so not distracting
+    " kvg_  g_ move to the last  non-blank char of current line
+    autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?\\v^(\\-\\-\|\\=\\=)+$\r:nohlsearch\rkvg_"<cr>
+    autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?\\v^(\\-\\-\|\\=\\=)+$\r:nohlsearch\rg_vk0"<cr>
 augroup END
 
 
