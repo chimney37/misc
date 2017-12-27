@@ -1,5 +1,8 @@
 " VIM CONFIGURATION FILE (CHIMNEY37)
 
+" Vim general Settings-----------------------{{{
+" always show statusline
+set laststatus=2
 " enable 256 colors
 set t_Co=256
 set ttyfast
@@ -19,10 +22,11 @@ set noswapfile
 " ignore case in search
 set ignorecase
 set showcmd
+" }}}
 
-" add indentation for PEP8
+" autocmd setting sections for python, C, etc. ------------------- {{{
 highlight BadWhitespace ctermbg=red guibg=darkred
-augroup Custom_PEP8_Group
+augroup Custom_Coding_group
     autocmd!
     au BufNewFile,BufRead *.py
         \ set tabstop=4 |
@@ -34,14 +38,11 @@ augroup Custom_PEP8_Group
         \ set fileformat=unix
     " flag extra whitespace
     au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+    au FileType vim setlocal foldmethod=marker
 augroup END
+" }}}
 
-" move between splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
+" Plugin Settings----------------{{{
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -151,8 +152,9 @@ call vundle#end()            " required
 
 filetype plugin indent on    " required
 syntax on
+" }}}
 
-" Choose color scheme
+" Color scheme Settings (highlights, etc.)----------------{{{
 if has('gui_running')
     set background=dark
     "colorscheme solarized
@@ -161,17 +163,16 @@ else
     colorscheme molokai 
 endif
 
-" disable arrow keys (rites of passage of VIM)
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Left> <NOP>
-"noremap <Right> <NOP>
+"highlight search by default
+set hlsearch
+highlight Search ctermbg=DarkCyan
+highlight Search ctermfg=LightRed
 
 " pretty code
-set hlsearch
 let python_highlight_all=1
+" }}}
 
-"NERD Tree
+" NERD Tree Plugin Settings ------------{{{
 " ignore pyc files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 " let NERD Tree hidden files by default
@@ -216,39 +217,63 @@ augroup Custom_NERDTreeGroup
     call NERDTreeHighlightFile('log', 'Magenta', 'none', '#ff00ff', '#151515')
     call NERDTreeHighlightFile('sh', 'DarkCyan', 'none', '#ffa500', '#151515')
 augroup END
+"}}}
 
-
-" pydoc string
+" pydocstring Plugin Settings ----------------------{{{
 nmap <silent> <C-D> <Plug>(pydocstring)
+"}}}
 
-"highlight search by default
-"set hlsearch
-highlight Search ctermbg=DarkCyan
-highlight Search ctermfg=LightRed
-
-
-"fuzzy search (Plugin)
+"Fuzzy search Plugin Settings-------------------{{{
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 "doesn't move the cursor
 map g/ <Plug>(incsearch-stay) 
+"}}}
 
-
-" notes (Plugin)
+" Notes Plugin Settings----------------------------{{{
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_suffix='.txt'
+"}}}
 
-
-" languagetool jar location
+" Languagetool settings--------------{{{ 
 let g:languagetool_jar='/usr/local/Cellar/languagetool/3.9/libexec/languagetool-commandline.jar'
+"}}}
 
-
-" Folding configuration
+" Fast Folding Plugin Settings ------------------{{{
 nmap zuz <Plug>(FastFoldUpdate)
 let g:fastfold_savehook = 1
 let g:fastfold_fold_command_suffixes =  []
 let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+"}}}
 
+" Acceleration of cursor Plugin Settings-------------------{{{
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+"}}}
+
+" You Complete me Plugin Settings---------------------{{{
+" complete me add customization to make it better
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:yvm_python_binary_path = 'python'
+
+" YCM sub command mappings
+noremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"}}}
+
+" Syntastic Plugin Settings --------------------------------{{{
+let g:syntastic_python_checkers= ['flake8']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"}}}
+
+" General mappings-------------------------{{{
+" move between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Tabbing
 nnoremap th  :tabfirst<CR>
@@ -258,27 +283,6 @@ nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap td  :tabclose<CR>
-
-
-" acceleration of cursor (Plugin)
-nmap j <Plug>(accelerated_jk_gj)
-nmap k <Plug>(accelerated_jk_gk)
-
-" You Complete me (Plugin)
-" complete me add customization to make it better
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:yvm_python_binary_path = 'python'
-
-" YCM sub command mappings
-noremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-
-"syntastic setting
-let g:syntastic_python_checkers= ['flake8']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " extra useful mappings
 noremap - <nop>
@@ -318,7 +322,7 @@ onoremap p i(
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F(vi(<cr>
 
-augroup Custom_FileTypeGroup
+augroup Custom_Mapping_Group
     autocmd!
     "commenting out certain code lines in different file types 
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
@@ -342,9 +346,10 @@ augroup Custom_FileTypeGroup
     autocmd FileType markdown onoremap in@ :<c-u>execute "normal!  /\\w\\v[a-z]+\\@\r:nohlsearch\rvt@"<cr>
 augroup END
 
+" }}}
 
-
-" Macros (python PEP8)
+" Macros----------------{{{ 
+" useful macros for fixing python PEP8
 let @a = '^f=ha la j'
 let @b = 'f,a '
 let @c = '^a j'
@@ -354,3 +359,9 @@ let @e = '$a  # flake8: noqa'
 " Macro (for converting markdown to bbcode
 let @m = ':2,$y+ |$ |read !echo "`pbpaste`" | perl ~/Documents/misc/md2bb.pl/md2bb.pl'
 let @n = ':2,$y+ |$ |read !echo "`pbpaste`" | node ~/Documents/nodejs/index.js'
+"}}}
+
+" Debugging-----------------{{{
+" for debugging statusline as powerline interferes
+"let g:powerline_loaded=1
+"}}}
