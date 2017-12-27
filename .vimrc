@@ -296,6 +296,8 @@ nnoremap <c-u> viwU$
 " make it easier to edit vimrc and source it
 nnoremap <localleader>ev :split $MYVIMRC<cr>
 nnoremap <localleader>sv :source $MYVIMRC<cr>
+" splitting the current buffer into a new split
+nnoremap <localleader>ec :execute "vsplit " . bufname("%")<cr>
 " bunch of abbreviations
 iabbrev adn and
 iabbrev tehn then
@@ -310,6 +312,14 @@ nnoremap <localleader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <localleader>' viw<esc>a'<esc>bi'<esc>lel
 " encase entire visual selection in single quotes
 vnoremap <localleader>' <esc>`<<esc>i'<esc>`>li'<esc>
+" delete 2 lines but can undo one at a time
+" Note: dddd that deletes 2 lines in succession in a command, is treated as
+" one undo-block in normal mode. This means without making adjustments, it is not
+" possible to undo each deletion separately. In order to do this, we must
+" break the undo sequence. Use :helpgrep undo to look up for hints:
+" <C-G>u is a way to break the undo sequence, but this only works in insert
+" mode, hence the i in the commands.
+nnoremap <localleader>d ddi<C-G>u<esc>dd
 nnoremap H ^
 nnoremap L $
 " rites of passage of vim
