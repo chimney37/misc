@@ -1,4 +1,4 @@
-" VIM CONFIGURATION FILE (CHIMNEY37)
+" VIM CONFIGURATION FILE 
 
 " Vim general Settings-----------------------{{{
 " always show statusline
@@ -28,7 +28,7 @@ set showcmd
 highlight BadWhitespace ctermbg=red guibg=darkred
 augroup Custom_Coding_group
     autocmd!
-    au BufNewFile,BufRead *.py
+    autocmd BufNewFile,BufRead *.py
         \ set tabstop=4 |
         \ set softtabstop=4 |
         \ set shiftwidth=4 |
@@ -37,8 +37,8 @@ augroup Custom_Coding_group
         \ set autoindent |
         \ set fileformat=unix
     " flag extra whitespace
-    au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-    au FileType vim setlocal foldmethod=marker
+    autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+    autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
 
