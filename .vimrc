@@ -317,6 +317,8 @@ nnoremap <localleader>w :execute ':match Error /\v\s+$/'<cr>
 " map to clear the match above
 nnoremap <localleader>W :execute ':match none'<cr>
 " nnoremap / /\v
+" stop highligting from last search
+nnoremap <localleader>? :nohlsearch<cr>
 " delete 2 lines but can undo one at a time
 " Note: dddd that deletes 2 lines in succession in a command, is treated as
 " one undo-block in normal mode. This means without making adjustments, it is not
