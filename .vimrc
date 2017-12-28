@@ -312,6 +312,11 @@ nnoremap <localleader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <localleader>' viw<esc>a'<esc>bi'<esc>lel
 " encase entire visual selection in single quotes
 vnoremap <localleader>' <esc>`<<esc>i'<esc>`>li'<esc>
+" map to highlight trailing whitespaces (outside of autocmd FileType)
+nnoremap <localleader>w :execute ':match Error /\v\s+$/'<cr>
+" map to clear the match above
+nnoremap <localleader>W :execute ':match none'<cr>
+" nnoremap / /\v
 " delete 2 lines but can undo one at a time
 " Note: dddd that deletes 2 lines in succession in a command, is treated as
 " one undo-block in normal mode. This means without making adjustments, it is not
@@ -339,6 +344,8 @@ augroup Custom_Mapping_Group
     autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
     " snippet for javascript
     autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+    " snippet to add semicolon
+    autocmd FileType javascript nnoremap <buffer> <localleader>ic :execute "normal! mqA;\e`q"<cr>
     " tag outline close for html
     autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
     " Delete header of markdown in current paragraph 
