@@ -317,6 +317,8 @@ nnoremap <localleader>w :execute ':match Error /\v\s+$/'<cr>
 " map to clear the match above
 nnoremap <localleader>W :execute ':match none'<cr>
 " nnoremap / /\v
+" run external grep on word under cursor
+nnoremap <localleader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
 " stop highligting from last search
 nnoremap <localleader>? :nohlsearch<cr>
 " delete 2 lines but can undo one at a time
