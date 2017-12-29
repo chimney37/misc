@@ -24,7 +24,7 @@ set ignorecase
 set showcmd
 " }}}
 
-" autocmd setting sections for python, C, etc. ------------------- {{{
+" Indentation and related setting sections for python, C, etc. ------------------- {{{
 highlight BadWhitespace ctermbg=red guibg=darkred
 augroup Custom_Coding_group
     autocmd!
@@ -39,6 +39,13 @@ augroup Custom_Coding_group
     " flag extra whitespace
     autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
     autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim
+        \ set tabstop=4 |
+        \ set softtabstop=4 |
+        \ set shiftwidth=4 |
+        \ set expandtab |
+        \ set autoindent |
+        \ set fileformat=unix
 augroup END
 " }}}
 
@@ -109,6 +116,7 @@ Plugin 'easymotion/vim-easymotion'
 
 " Git Integration (:Git)
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-dispatch'
 
 " Show edited lines managed by Git
@@ -269,6 +277,10 @@ let g:syntastic_check_on_wq = 0
 "}}}
 
 " General mappings-------------------------{{{
+" extra useful mappings
+noremap - <nop>
+let maplocalleader="-"
+
 " move between splits
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -284,9 +296,6 @@ nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap td  :tabclose<CR>
 
-" extra useful mappings
-noremap - <nop>
-let maplocalleader="-"
 " swap 2 lines
 nnoremap <localleader>- ddp
 nnoremap <localleader>_ ddkP
@@ -298,13 +307,6 @@ nnoremap <localleader>ev :split $MYVIMRC<cr>
 nnoremap <localleader>sv :source $MYVIMRC<cr>
 " splitting the current buffer into a new split
 nnoremap <localleader>ec :execute "vsplit " . bufname("%")<cr>
-" bunch of abbreviations
-iabbrev adn and
-iabbrev tehn then
-iabbrev waht what
-iabbrev @@ chimney37@hotmail.com
-iabbrev ccopy Copyright 2017 chimney37, all rights reserved.
-iabbrev ssig -- <cr>chimney37<cr>chimney37@hotmail.com
 "complicated mappings
 " encase word under visual selection in double quotes
 nnoremap <localleader>" viw<esc>a"<esc>bi"<esc>lel
@@ -316,11 +318,17 @@ vnoremap <localleader>' <esc>`<<esc>i'<esc>`>li'<esc>
 nnoremap <localleader>w :execute ':match Error /\v\s+$/'<cr>
 " map to clear the match above
 nnoremap <localleader>W :execute ':match none'<cr>
+
 " nnoremap / /\v
 " run external grep on word under cursor
-nnoremap <localleader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
+" nnoremap <localleader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen 5<cr>
+" cnext and cprevious mappings
+nnoremap <localleader>n :cnext<cr>
+nnoremap <localleader>p :cprevious<cr>
+
 " stop highligting from last search
 nnoremap <localleader>? :nohlsearch<cr>
+
 " delete 2 lines but can undo one at a time
 " Note: dddd that deletes 2 lines in succession in a command, is treated as
 " one undo-block in normal mode. This means without making adjustments, it is not
@@ -346,6 +354,7 @@ augroup Custom_Mapping_Group
     "commenting out certain code lines in different file types 
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
     autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+    autocmd FileType vim nnoremap <buffer> <localleader>c I"<esc>
     " snippet for javascript
     autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
     " snippet to add semicolon
@@ -366,7 +375,14 @@ augroup Custom_Mapping_Group
     autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?\\v^(\\-\\-\|\\=\\=)+$\r:nohlsearch\rg_vk0"<cr>
     autocmd FileType markdown onoremap in@ :<c-u>execute "normal!  /\\w\\v[a-z]+\\@\r:nohlsearch\rvt@"<cr>
 augroup END
-
+" bunch of abbreviations
+iabbrev adn and
+iabbrev teh the
+iabbrev tehn then
+iabbrev waht what
+iabbrev mail@@ mail@hotmail.com
+iabbrev ccopy Copyright 2017 chimney37, all rights reserved.
+iabbrev ssig -- <cr>chimney37<cr>chimney37@hotmail.com
 " }}}
 
 " Macros----------------{{{ 
