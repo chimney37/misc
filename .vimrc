@@ -375,6 +375,43 @@ augroup Custom_Mapping_Group
     autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?\\v^(\\-\\-\|\\=\\=)+$\r:nohlsearch\rg_vk0"<cr>
     autocmd FileType markdown onoremap in@ :<c-u>execute "normal!  /\\w\\v[a-z]+\\@\r:nohlsearch\rvt@"<cr>
 augroup END
+" }}}
+
+" Toggling Option Settings ---------------{{{
+" Show or not show the foldcolumn
+nnoremap <localleader>f :call <SID>FoldColumnToggle()<cr>
+
+function! s:FoldColumnToggle()
+    if &foldcolumn
+        setlocal foldcolumn=0
+    else
+        setlocal foldcolumn=2
+    endif
+endfunction
+
+" open or close the quickfix window, with the additional feature of going back
+" to the previous window when closing the quickfix
+nnoremap <localleader>q :call <SID>QuickFixToggle()<cr>
+
+let g:quickfix_is_open = 0
+
+function! s:QuickFixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        " wincmd tells Vim to go to the window specified with a window number
+        " prepended as a count
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        " save current window number
+        let g:quickfix_return_to_window = winnr() 
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+" }}}
+
+"Abbreviation Settings -----------------{{{
 " bunch of abbreviations
 iabbrev adn and
 iabbrev teh the
@@ -383,7 +420,7 @@ iabbrev waht what
 iabbrev mail@@ mail@hotmail.com
 iabbrev ccopy Copyright 2017 chimney37, all rights reserved.
 iabbrev ssig -- <cr>chimney37<cr>chimney37@hotmail.com
-" }}}
+"}}}
 
 " Macros----------------{{{ 
 " useful macros for fixing python PEP8
