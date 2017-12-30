@@ -39,7 +39,7 @@ augroup Custom_Coding_group
     " flag extra whitespace
     autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
     autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType vim
+    autocmd FileType vim,potion
         \ set tabstop=4 |
         \ set softtabstop=4 |
         \ set shiftwidth=4 |
