@@ -349,6 +349,7 @@ onoremap p i(
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F(vi(<cr>
 
+" Custom_Mapping_Group AutoGroup ---------------{{{
 augroup Custom_Mapping_Group
     autocmd!
     "commenting out certain code lines in different file types 
@@ -375,6 +376,7 @@ augroup Custom_Mapping_Group
     autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?\\v^(\\-\\-\|\\=\\=)+$\r:nohlsearch\rg_vk0"<cr>
     autocmd FileType markdown onoremap in@ :<c-u>execute "normal!  /\\w\\v[a-z]+\\@\r:nohlsearch\rvt@"<cr>
 augroup END
+"}}}
 " }}}
 
 " Toggling Option Settings ---------------{{{
