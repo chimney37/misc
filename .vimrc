@@ -327,7 +327,7 @@ nnoremap <localleader>n :cnext<cr>
 nnoremap <localleader>p :cprevious<cr>
 
 " stop highligting from last search
-nnoremap <localleader>? :nohlsearch<cr>
+nnoremap <silent> <localleader>? :nohlsearch<cr>
 
 " delete 2 lines but can undo one at a time
 " Note: dddd that deletes 2 lines in succession in a command, is treated as
@@ -379,8 +379,8 @@ augroup END
 
 " Toggling Option Settings ---------------{{{
 " Show or not show the foldcolumn
-nnoremap <localleader>f :call <SID>FoldColumnToggle()<cr>
-
+nnoremap <silent> <localleader>f :call <SID>FoldColumnToggle()<cr>
+" FoldColumn Toggling Function ---------------{{{
 function! s:FoldColumnToggle()
     if &foldcolumn
         setlocal foldcolumn=0
@@ -388,13 +388,13 @@ function! s:FoldColumnToggle()
         setlocal foldcolumn=2
     endif
 endfunction
+"}}}
 
 " open or close the quickfix window, with the additional feature of going back
 " to the previous window when closing the quickfix
-nnoremap <localleader>q :call <SID>QuickFixToggle()<cr>
-
+nnoremap <silent> <localleader>q :call <SID>QuickFixToggle()<cr>
+" Quick Fix Toggling Function -----------{{{
 let g:quickfix_is_open = 0
-
 function! s:QuickFixToggle()
     if g:quickfix_is_open
         cclose
@@ -409,6 +409,7 @@ function! s:QuickFixToggle()
         let g:quickfix_is_open = 1
     endif
 endfunction
+"}}}
 " }}}
 
 "Abbreviation Settings -----------------{{{
