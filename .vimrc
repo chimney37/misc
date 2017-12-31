@@ -202,8 +202,7 @@ let g:NERDTreeIndicatorMapCustom = {
 " open NERDTree
 noremap <C-n> :NERDTreeToggle<CR>
 
-" allow multiple highlighting based on file in NERDTree
-" NERDTress File highlighting
+" NERDTree File highlighting --------------------{{{
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
@@ -225,6 +224,7 @@ augroup Custom_NERDTreeGroup
     call NERDTreeHighlightFile('log', 'Magenta', 'none', '#ff00ff', '#151515')
     call NERDTreeHighlightFile('sh', 'DarkCyan', 'none', '#ffa500', '#151515')
 augroup END
+"}}}
 "}}}
 
 " pydocstring Plugin Settings ----------------------{{{
