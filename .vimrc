@@ -398,12 +398,23 @@ nnoremap <silent> <localleader>q :call <SID>QuickFixToggle()<cr>
 " Quick Fix Toggling Function -----------{{{
 let g:quickfix_is_open = 0
 function! s:QuickFixToggle()
-    if g:quickfix_is_open
+    " solve the case where copen is called elsewhere outside of this function
+    " getqflist gets the quickfix list, dictionary item gets the value of the
+    " item when set to 0
+    let g:quickfix_opened_elsewhere = getqflist({'winid' : 0}).winid != 0
+    if g:quickfix_is_open || g:quickfix_opened_elsewhere 
         cclose
         let g:quickfix_is_open = 0
         " wincmd tells Vim to go to the window specified with a window number
         " prepended as a count
-        execute g:quickfix_return_to_window . "wincmd w"
+        if g:quickfix_opened_elsewhere != 0
+            " when opened elsewhere, quickfix_return_to_window is undefined,
+            " so open the top window (value of 1)
+            execute '1' . "wincmd w"
+        else
+            execute g:quickfix_return_to_window . "wincmd w"
+        endif
+        " case where qf is closed
     else
         " save current window number
         let g:quickfix_return_to_window = winnr() 
