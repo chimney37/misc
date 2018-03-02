@@ -28,7 +28,7 @@ set showcmd
 highlight BadWhitespace ctermbg=red guibg=darkred
 augroup Custom_Coding_group
     autocmd!
-    autocmd BufNewFile,BufRead *.py
+    autocmd BufNewFile,BufRead *.py,*.go
         \ set tabstop=4 |
         \ set softtabstop=4 |
         \ set shiftwidth=4 |
@@ -37,8 +37,8 @@ augroup Custom_Coding_group
         \ set autoindent |
         \ set fileformat=unix
     " flag extra whitespace
-    autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-    autocmd FileType vim setlocal foldmethod=marker
+    autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.go match BadWhitespace /\s\+$/
+    autocmd FileType vim,go,python setlocal foldmethod=marker
     autocmd FileType vim,potion
         \ set tabstop=4 |
         \ set softtabstop=4 |
@@ -123,8 +123,6 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'airblade/vim-gitgutter'
 
 " coloring
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
 
 " color scheme extension to tmux following vim's style
@@ -144,7 +142,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 
 " hacker news (:HackerNews)
-Plugin 'ryanss/vim-hackernews'
+Plugin 'dansomething/vim-hackernews'
 
 " quantify coding time
 Plugin 'wakatime/vim-wakatime'
@@ -152,8 +150,10 @@ Plugin 'wakatime/vim-wakatime'
 "language checker
 Plugin 'chimney37/vim-LanguageTool'
 
-" test development plugin
+" Potion sandbox plugin
 Plugin 'chimney37/potion'
+" Convert Markdown to BB plugin
+Plugin 'chimney37/vim-md2bb'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -189,9 +189,9 @@ let NERDTreeShowHidden = 1
 let g:NERDTreeIndicatorMapCustom = {
 	\ "Modified"	:"*",
 	\ "Staged"	:"a",
-	\ "Untracked"	:"u",
+	\ "Untracked"	:"u̱",
 	\ "Renamed"	:">",
-	\ "Unmerged"	:"u",
+	\ "Unmerged"	:"ū",
 	\ "Deleted"	:"x",
 	\ "Dirty"	:"@",
 	\ "Clean"	:"c",
@@ -353,7 +353,7 @@ onoremap il( :<c-u>normal! F(vi(<cr>
 augroup Custom_Mapping_Group
     autocmd!
     "commenting out certain code lines in different file types 
-    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+    autocmd FileType javascript,go nnoremap <buffer> <localleader>c I//<esc>
     autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
     autocmd FileType vim nnoremap <buffer> <localleader>c I"<esc>
     " snippet for javascript
