@@ -6,10 +6,13 @@ export CLICOLOR=1
 eval "$(pyenv init -)"
 
 # Powerline
+export PATH=$PATH:$HOME/Library/Python/3.6/bin
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-source /Users/lxuser/.pyenv/versions/3.6.4/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+# source /Users/lxuser/.pyenv/versions/3.6.4/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+
+. /Users/lxuser/Library/Python/3.6/lib/python/site-packages/powerline/bindings/bash/powerline.sh
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
