@@ -150,11 +150,6 @@ Plugin 'wakatime/vim-wakatime'
 "language checker
 Plugin 'chimney37/vim-LanguageTool'
 
-" Potion sandbox plugin
-Plugin 'chimney37/potion'
-" Convert Markdown to BB plugin
-Plugin 'chimney37/vim-md2bb'
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -269,6 +264,7 @@ noremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "}}}
 
 " Syntastic Plugin Settings --------------------------------{{{
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 let g:syntastic_python_checkers= ['flake8']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -443,6 +439,8 @@ let @b = 'f,a '
 let @c = '^a j'
 let @d = 'f:a l'
 let @e = '$a  # flake8: noqa'
+let @f = '^i<!--$a-->j'
+let @g = '^4x$xxxj'
 
 " Macro (for converting markdown to bbcode
 let @m = ':2,$y+ |$ |read !echo "`pbpaste`" | perl ~/Documents/misc/md2bb.pl/md2bb.pl'
