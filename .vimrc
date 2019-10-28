@@ -22,6 +22,7 @@ set noswapfile
 " ignore case in search
 set ignorecase
 set showcmd
+set ambiwidth=double
 " }}}
 
 " Indentation and related setting sections for python, C, etc. ------------------- {{{
@@ -82,7 +83,7 @@ Plugin 'Konfekt/FastFold'
 Plugin 'scrooloose/nerdcommenter'
 
 " auto-complete for python
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " syntax checking and highlighting
 Plugin 'scrooloose/syntastic'
@@ -270,6 +271,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+"}}}
+
+" Indentation Plugin Settings ------------------------------{{{
+let g:indentLine_noConcealCursor=1
 "}}}
 
 " General mappings-------------------------{{{
